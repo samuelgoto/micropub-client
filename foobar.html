@@ -1,20 +1,49 @@
-hello world
-
-<script>
+<html>
+  <head>
+    <script>
 
 let url = document.location.search;
 
 let params = new URLSearchParams(url);
+let access_token = params.get("access_token");
 
-let code = params.get("code");
-let me = params.get("me");
-let state = params.get("state");
+async function request(action, method, params) {
+  let url = new URL(action, document.location);
 
-async function fetchAuthToken(code, me) {
-  let result = await fetch(`/fetch?code=${code}&me=${me}`);
-  console.log(await result.json());
+  url.searchParams.append("access_token", access_token);
+
+  for (let param in params) {
+    url.searchParams.append(param, params[param]);
+  }
+
+  let result = await fetch(url, {
+    method: method
+  });
+
+  return await result.json();
 }
 
-fetchAuthToken(code, me);
+async function main() {
+  let ch = await request("/channels");
+  console.log(ch);
+  let channel = ch.channels[1].uid
+  let feed = await request("/follow", "POST", {
+    channel: channel,
+    url: "http://code.sgo.to"
+  });
+  console.log(feed);
 
-</script>
+  let timeline = await request("/timeline", "GET", {
+    channel: channel
+  });
+  console.log(timeline);
+}
+
+main();
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
