@@ -29,9 +29,13 @@ async function main() {
   let channel = ch.channels[1].uid
   let feed = await request("/follow", "POST", {
     channel: channel,
-    url: "http://code.sgo.to"
+    url: "http://tantek.com/"
   });
   console.log(feed);
+
+  console.log(await request("/follow", "GET", {
+    channel: channel
+  }));
 
   let timeline = await request("/timeline", "GET", {
     channel: channel
