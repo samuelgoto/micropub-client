@@ -1,0 +1,21 @@
+{
+  "name": "micropub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelgoto/micropub.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/samuelgoto/micropub/issues"
+  },
+  "homepage": "https://github.com/samuelgoto/micropub",
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  }
+}

@@ -1,0 +1,20 @@
+hello world
+
+<script>
+
+let url = document.location.search;
+
+let params = new URLSearchParams(url);
+
+let code = params.get("code");
+let me = params.get("me");
+let state = params.get("state");
+
+async function fetchAuthToken(code, me) {
+  let result = await fetch(`/fetch?code=${code}&me=${me}`);
+  console.log(await result.json());
+}
+
+fetchAuthToken(code, me);
+
+</script>
